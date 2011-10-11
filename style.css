@@ -1,9 +1,13 @@
+html,body {
+height:100%;
+}
+
 div.img_left
 {
   margin: 2px;
   border: 1px solid #0000ff;
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 49%;
   float: left;
   text-align: center;
 }	
@@ -20,4 +24,26 @@ div.desc
   font-weight: normal;
   width: 120px;
   margin: 2px;
+}
+
+.page{
+	background-image:url('/images/page2.jpg ');
+	-moz-box-shadow:0px 1px 4px rgba(0,0,0,0.5);
+	-webkit-box-shadow:0px 1px 4px rgba(0,0,0,0.5);
+	-o-box-shadow:0px 1px 4px rgba(0,0,0,0.5);
+	box-shadow:0px 1px 4px rgba(0,0,0,0.5);
+	margin-top:10%;
+	margin-left:10%;
+	margin-right:10%;
+	margin-bottom :10%;
+    overflow:auto;
+    display: block;
+    
+}
+
+.home-section{
+	margin-top:10%;
+	margin-left:10%;
+	margin-right:10%;
+	margin-bottom:10%;
 }
