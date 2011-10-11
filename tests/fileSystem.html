@@ -2,22 +2,62 @@
 <html>
   <head>
     <title>
+    test for filesystem api
     </title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   </head>
   <body>
 
-<style>
+<style type="text/css">
   .thumb {
     height: 75px;
     border: 1px solid #000;
     margin: 10px 5px 0 0;
   }
+  
+  div.fileinputs {
+	position: relative;
+}
+
+div.fakefile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+input.file {
+	position: relative;
+	text-align: right;
+	-moz-opacity:0 ;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+	z-index: 2;
+}
 </style>
 
 <input type="file" id="files" name="files[]" multiple />
 <output id="list"></output>
 
-<script>
+<div id="a">click me</div>
+
+
+<div class="fileinputs">
+	<input type="file" class="file" />
+	<div class="fakefile">
+		<input />
+		<img src="search.gif" />
+	</div>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("a").click(function(){
+    $("files").click();
+  });
+});
+
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
