@@ -17,6 +17,7 @@ div.img_left img_left
   margin: 3px;
   border: 1px solid #ffffff;
 }
+.right {float:right !important;}
 div.img_left a:hover img_left {border: 1px solid #0000ff;}
 div.desc
 {
