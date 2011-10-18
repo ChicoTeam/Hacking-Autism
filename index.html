@@ -5,44 +5,22 @@
 
  
 <link rel='stylesheet' href='style.css' type='text/css' /> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.js"></script>
 <script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="database.js"></script>
 </head>
 <body>
-	<script>
 
-		//var db = openDatabase('HackingAutism', '1.0', 'my first database', 2 * 1024 * 1024);
-
-		var db;
-
-
-	function setupDatabase() {
-	  if (!window.openDatabase) {
-	    echo('<div>Web SQL Database API is not available in this browser</div>');
-	    return;
-	  }
-	  db = openDatabase('HackingAutism', '1.0', 'Emotions db', 2 * 1024 * 1024);
-	  db.transaction(function (tx) {
-	   // tx.executeSql('DROP TABLE IF EXISTS tweets');
-	    tx.executeSql('CREATE TABLE IF NOT EXISTS Emotions (emotion_id unique, label TEXT)');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS Spectrums (spectrum_id unique, emotion_id1, emotion_id2  )');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS SpectrumLog (ID INTEGER PRIMARY KEY ASC, spectrum_id TEXT, mood_value FLOAT , added_on DATETIME)');
-
-	  });
-
-	}
-	 setupDatabase();
-
-	</script>
 	
 <div class="page">
 	<div class="img_left">
-	 <a target="_blank" href="www.google.com"><img src="http://www.psychologytoday.com/files/u15/Happiness_1.jpg" alt="Balloon" width="100%" /></a>
+	 <a target="_blank" href="#"><img src="http://openiconlibrary.sourceforge.net/gallery2/open_icon_library-full/icons/png/256x256/emotes/face-smile-3.png" alt="Happy" width="100%" /></a>
 	 <div class="desc">Happy</div>
 	</div>
 	<div class="img_left right">
-		<a target="_blank" href="www.google.com"><img src="http://2.bp.blogspot.com/-RSB-rvdxdrc/TmTr_RJW_HI/AAAAAAAAA00/aSIk49nnx1g/s1600/sad_face.jpg" alt="color" width="100%"/></a>
-	 
+		<a target="_blank" href="#"><img src="http://openiconlibrary.sourceforge.net/gallery2/open_icon_library-full/icons/png/256x256/emotes/face-sad-3.png" alt="Sad" width="100%"/></a>
 	 <div class="desc">Sad</div>
 	</div>
 	</div>
@@ -52,5 +30,8 @@
 	  <a href="#">2</a> | 
 	  <a href="#">3</a>
 	</p>
+	
+	<p align="center"><div id="slider"></div></p>
+	<br /><br /><br />
 </body> 
 </html> 

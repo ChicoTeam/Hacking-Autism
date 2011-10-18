@@ -23,12 +23,11 @@ div.desc
 {
   text-align: center;
   font-weight: normal;
-  width: 120px;
   margin: 2px;
 }
 
 .page{
-	background-image:url('/images/page2.jpg ');
+	/*background-image:url('/images/page2.jpg ');*/
 	-moz-box-shadow:0px 1px 4px rgba(0,0,0,0.5);
 	-webkit-box-shadow:0px 1px 4px rgba(0,0,0,0.5);
 	-o-box-shadow:0px 1px 4px rgba(0,0,0,0.5);
