@@ -20,8 +20,10 @@ var Page = function(id) {
 
 	// load this object's properties from the DB using id
 	this.load = function(id) {
+		// debug
 		console.log("loading page: " + id);
 	
+		// database call
 		var results = lib.query("pages", {ID: id});
 		
 		// debug
@@ -31,7 +33,6 @@ var Page = function(id) {
 		// TODO: write error handler for no results case
 		
 		// copy values into this object
-		// TODO: add all properties here
 		// TODO: find a way to do this all at once
 		this.setDescription(results[0].description);
 		this.setPageOrder(results[0].pageOrder);
@@ -39,10 +40,13 @@ var Page = function(id) {
 		return true;
 	}
 
+	// store this object into the db
 	this.save = function() {
-		// store this object into the db
+		// database call
 		var id = lib.insert("pages", this);
 		lib.commit();// commit the db operation
+		
+		// TODO: write update method
 		
 		return id; // return new record id
 	}
