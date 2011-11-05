@@ -13,51 +13,59 @@
 
 
 // Page Prototype
-var Page = function(ID) {
-	// constructor goes here?
+var Page = function(id) {
+	// object properties
 	this.description = "";
-	if(typeof(ID) != "undefined") {
-		this.ID = ID; // TODO: use this id to get DB data
-	}
-	
+	this.pageOrder = -1;
+
+	// load this object's properties from the DB using id
 	this.load = function(id) {
-		// load this object's properties from the DB using id
-		var myPageData = lib.query("Pages", {ID: id});
+		console.log("loading page: " + id);
+	
 		
-		this = JSON.parse(myPageData);
+		var results = lib.query("pages", {ID: id});
 		
+		// debug
+		console.log("retrieved from db: ");
+		console.log(results);
+		
+		// TODO: write error handler for no results case
+		
+		// copy values into this object
+		// TODO: add all properties here
+		// TODO: find a way to do this all at once
+		this.setDescription(results[0].description);
+		this.setPageOrder(results[0].pageOrder);
+	
 		return true;
 	}
 
 	this.save = function() {
-		// serialize this object and store into the db
-		thisAsJSON = JSON.stringify(this);
-		var id = lib.insert("Pages", thisAsJSON);
-		lib.commit;
+		// store this object into the db
+		var id = lib.insert("pages", this);
+		lib.commit();// commit the db operation
+		
 		return id; // return new record id
 	}
 
 	this.setDescription = function(description) {
-	  this.description = description;
-		return true;
+		this.description = description;
 	}
 	
 	this.getDescription = function() {
 		return this.description;
 	}
 	
-	this.setPageOrder = function(order) {
-	  // TODO: implement this method
-		return true;
+	this.setPageOrder = function(pageOrder) {
+		this.pageOrder = pageOrder;
 	}
 	
 	this.getPageOrder = function() {
-	  // TODO: implement this method
 		return this.pageOrder;
 	}
 	
 	this.addPicture = function(pictureObject) {
-	  // TODO: implement this method
+		// TODO: implement this method
 	
 		// add row to pages_pictures table
 
@@ -68,6 +76,11 @@ var Page = function(ID) {
 	  // TODO: implement this method
 	
 		return true; // return false if not successful
+	}
+	
+	// constructor goes here?
+	if(typeof(id) != "undefined") {
+		this.load(id);
 	}
 }
 
