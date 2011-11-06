@@ -1,22 +1,3 @@
-/*		
-	These prototypes are meant to be instantiated as objects. 
-	They are Data Access Objects that will interact with the application database.
-	
-	Example usage (with jQuery):
-	var myPage = new Page();
- 	$(“addPictureButton”).click(function(){
-		var myPicture = new Picture();
-		myPicture.setImageData(dialogBox());
-		myPage.addPicture(myPicture);
-	});
-*/
-
-
-
-
-
-
-
 // Report prototype
 var Report = function() {
 	this.getThermometerByTime = function(datetime_start, datetime_end, page_id) {
