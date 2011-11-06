@@ -86,7 +86,7 @@ var Page = function(ID) {
 	}
 	
 	// constructor goes here?
-	if(typeof(id) != "undefined") {
-		this.load(id);
+	if(typeof(ID) != "undefined") {
+		this.load(ID);
 	}
 }
