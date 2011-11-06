@@ -22,6 +22,9 @@ Tips: <br />
 - Click "Console" tab to input Javascript directly. <br />
 - Use console.log() or alert() to help with debugging. <br />
 
+<canvas id="test" width="380" height="380"></canvas>
+
+<img id="pic" src="http://media.zenfs.com/en_us/News/afp.com/000_Nic6025252.jpg">
 
 </body>
 </html>
