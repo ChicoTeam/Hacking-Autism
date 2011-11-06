@@ -92,5 +92,3 @@ Page.prototype = {
 		this._pageOrder = val;
 	}
 };
-
-// lost.location will now return "Another island"
