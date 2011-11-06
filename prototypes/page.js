@@ -1,8 +1,8 @@
 // Page Prototype
 var Page = function(ID) {
 	// object properties
-	this.description = "";
-	this.pageOrder = -1;
+	this.description = null;
+	this.pageOrder = null;
 
 	// load this object's properties from the DB using id
 	this.load = function(ID) {
@@ -14,7 +14,7 @@ var Page = function(ID) {
 		console.log("retrieved from db: ");
 		console.log(results);
 		
-		// TODO: write error handler for "no results" case
+		// TODO: write error handler for "no results" case (return false)
 		
 		// copy values into this object
 		// TODO: find a way to do this all at once
@@ -33,9 +33,10 @@ var Page = function(ID) {
 		if(results.length > 0) {
 			console.log("updating database record...");
 		
-			// update database record
+			// update database record...
 			var thisObj = this;
 			lib.update("pages", {ID: this.ID}, function(row) {
+				// note "this" takes on a different context within a function, so we must use thisObj
 				row = thisObj;
 
 				return row;
@@ -79,8 +80,8 @@ var Page = function(ID) {
 		return true;
 	}
 
-	this.removePicture = function(picture_id) {
-	  // TODO: implement this method
+	this.removePicture = function(picture_ID) {
+		// TODO: implement this method
 	
 		return true; // return false if not successful
 	}
