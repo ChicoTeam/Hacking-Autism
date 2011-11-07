@@ -5,15 +5,12 @@ function Page(ID) {
 	this._description = null;
 	this._pageOrder = null;
 
-	// load this object's properties from the DB using id
-	this.load = function(val) {
-		console.log("loading page: " + val);
+	// load this object's properties from the DB using an ID
+	this.load = function(ID) {
+		console.log("loading page: " + ID);
 	
 		// search database by ID
-		var results = lib.query("pages", {ID: val});
-		
-		console.log("retrieved from db: ");
-		console.log(results);
+		var results = lib.query("pages", {ID: ID});
 		
 		// TODO: write error handler for "no results" case (return false)
 		
@@ -26,49 +23,99 @@ function Page(ID) {
 		return true;
 	}
 
-	// store this object into the db
+	// store this object into the db (insert/update)
 	this.save = function() {
 		// check database for existing record
 		var results = lib.query("pages", {ID: this.ID});
 	
 		if(results.length > 0) {
-			console.log("updating database record...");
+			console.log("updating...");
 		
 			// update database record...
 			var thisObj = this;
-			lib.update("pages", {ID: this.ID}, function(row) {
+			var result_id = lib.update("pages", {ID: this.ID}, function(row) {
 				// note "this" takes on a different context within a function, so we must use thisObj
 				row = thisObj;
 
 				return row;
 			});
 			lib.commit();// commit the db operation
+			
+			this.ID = result_id;
 		}
 		else {
-			console.log("inserting new database record...");
+			console.log("inserting...");
 		
 			// insert new database record
-			var resultId = lib.insert("pages", this);
+			var result_id = lib.insert("pages", this);
 			lib.commit();// commit the db operation
 		
-			this.ID = resultId;
+			this.ID = result_id;
 		}
 	
-		return resultId; // return new record id
+		return result_id; // return new record id
 	}
 	
-	this.addPicture = function(pictureObject) {
-		// TODO: implement this method
+	// delete this object from the database (using this.ID to query db)
+	this.delete = function() {
+		console.log("deleting... " + this.ID);
+		
+		lib.deleteRows("pages", {ID: this.ID});
+		lib.commit();
+		
+		// TODO: write "not found" exception handler (return false)
+		
+		return true;
+	}
 	
-		// add row to pages_pictures table
+	this.addPicture = function(pic_ID) {
+		// get max picture "order"...
+		var max = 1;
+		var results = lib.query("pages_pictures", {page_ID: this.ID});
+		for(var i = 0; i < results.length; i++) {
+			if(results[i].order > max)
+				max = results[i].order;
+		}
+		var next_order = max + 1;
+	
+		// check to see if picture is already on page
+		var page_ID = this.ID;
+		var results = lib.query("pages_pictures", function(row) {
+				if(row.picture_ID == pic_ID && row.page_ID == page_ID) {
+				    return true;
+				} else {
+				    return false;
+				}
+		});
+	
+		if(results.length == 0) {
+			// insert record
+			lib.insert("pages_pictures", {page_ID: this.ID, picture_ID: pic_ID, order: next_order});
+			lib.commit();
+		}
+		else {
+			// row already exists!
+			return false;
+		}
 
 		return true;
 	}
 
-	this.removePicture = function(picture_ID) {
-		// TODO: implement this method
-	
-		return true; // return false if not successful
+	this.removePicture = function(pic_ID) {
+		var page_ID = this.ID;
+		var results = lib.deleteRows("pages_pictures", function(row) {
+				if(row.picture_ID == pic_ID && row.page_ID == page_ID) { 
+				    return true;
+				} else {
+				    return false;
+				}
+		});
+		lib.commit();
+
+		if(results == 0)
+			return false;// record was not deleted
+			
+		return true;// success
 	}
 	
 	// constructor goes here?
@@ -77,7 +124,7 @@ function Page(ID) {
 	}
 }
 
-// define getters and setters
+// define getters and setters for object properties
 Page.prototype = {
 	get description() {
 		return this._description;
