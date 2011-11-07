@@ -18,4 +18,4 @@ if( lib.isNew() ) {
     
     // commit the database to localStorage
     lib.commit();
-}   
+}

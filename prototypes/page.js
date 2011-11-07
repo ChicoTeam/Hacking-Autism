@@ -12,7 +12,8 @@ function Page(ID) {
 		// search database by ID
 		var results = lib.query("pages", {ID: ID});
 		
-		// TODO: write error handler for "no results" case (return false)
+		if(results.length == 0)
+			return false;// page not found
 		
 		// copy values into this object
 		// TODO: find a way to do this all at once
@@ -48,7 +49,7 @@ function Page(ID) {
 		
 			// insert new database record
 			var result_id = lib.insert("pages", this);
-			lib.commit();// commit the db operation
+			lib.commit();
 		
 			this.ID = result_id;
 		}
@@ -60,12 +61,13 @@ function Page(ID) {
 	this.delete = function() {
 		console.log("deleting... " + this.ID);
 		
-		lib.deleteRows("pages", {ID: this.ID});
+		var results = lib.deleteRows("pages", {ID: this.ID});
 		lib.commit();
 		
-		// TODO: write "not found" exception handler (return false)
-		
-		return true;
+		if(results.length == 0)
+			return false;// nothing deleted
+
+		return true;// success
 	}
 	
 	this.addPicture = function(pic_ID) {

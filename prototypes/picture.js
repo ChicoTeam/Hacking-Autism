@@ -12,7 +12,8 @@ var Picture = function(ID) {
 		// search database by ID
 		var results = lib.query("pictures", {ID: ID});
 
-		// TODO: write error handler for "no results" case (return false)
+		if(results.length == 0)
+			return false;// picture not found
 		
 		// copy values into this object
 		// TODO: find a way to do this all at once
@@ -58,12 +59,11 @@ var Picture = function(ID) {
 	this.delete = function() {
 		console.log("deleting... " + this.ID);
 		
-		lib.deleteRows("pictures", {ID: this.ID});
+		var results = lib.deleteRows("pictures", {ID: this.ID});
 		lib.commit();
 		
-		this = null;
-		
-		// TODO: write "not found" exception handler (return false)
+		if(results.length == 0)
+			return false;// delete not successful
 		
 		return true;
 	}
