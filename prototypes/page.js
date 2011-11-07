@@ -83,11 +83,11 @@ function Page(ID) {
 		// check to see if picture is already on page
 		var page_ID = this.ID;
 		var results = lib.query("pages_pictures", function(row) {
-				if(row.picture_ID == pic_ID && row.page_ID == page_ID) {
-				    return true;
-				} else {
-				    return false;
-				}
+			if(row.picture_ID == pic_ID && row.page_ID == page_ID) {
+				return true;
+			} else {
+				return false;
+			}
 		});
 	
 		if(results.length == 0) {
@@ -106,11 +106,11 @@ function Page(ID) {
 	this.removePicture = function(pic_ID) {
 		var page_ID = this.ID;
 		var results = lib.deleteRows("pages_pictures", function(row) {
-				if(row.picture_ID == pic_ID && row.page_ID == page_ID) { 
-				    return true;
-				} else {
-				    return false;
-				}
+			if(row.picture_ID == pic_ID && row.page_ID == page_ID) { 
+				return true;
+			} else {
+				return false;
+			}
 		});
 		lib.commit();
 
