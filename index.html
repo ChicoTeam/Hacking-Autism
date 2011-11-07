@@ -17,6 +17,17 @@
 To debug: <br />
 Hit F12 to open Developer Console. <br />
 <br />
+Example usage:<br />
+<pre>
+// create new page
+var myPage = new Page();
+myPage.description = "first page";
+myPage.save();
+
+// load existing page with ID "12"
+var myExistingPage = new Page(12);
+</pre>
+<br />
 Tips: <br />
 - Click "Scripts" tab and select the appropriate Javascript file. You can set breakpoints here. <br />
 - Click "Console" tab to input Javascript directly. <br />
