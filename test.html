@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html> 
+	<head> 
+		<title>Hacking Autism</title> 
+
+		<!--- this order is important --->
+		
+		
+		<!--- <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"> -->
+
+		<script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.0rc2.js"></script>
+		<link rel="stylesheet" href="jquery.mobile-1.0rc2.css" />
+		
+		<script type="text/javascript" src="localstoragedb/localstoragedb.js"></script>
+		<script type="text/javascript" src="base64/base64.js"></script>
+		<script type="text/javascript" src="database.js"></script>
+		<script type="text/javascript" src="prototypes/page.js"></script>
+		<script type="text/javascript" src="prototypes/picture.js"></script>
+		<script type="text/javascript" src="prototypes/report.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+	</head>
+
+	<body>
+		<!-- Start of first page -->
+		<div data-role="page" id="mainmenu">
+
+			<div data-role="header">
+				<h1>Visual Thermometer</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">	
+				<p><a href="#pageoption">I'm a Page, click me</a></p>	
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+
+		<!-- Start of options page -->
+		<div data-role="page" id="pageoption">
+
+			<div data-role="header">
+				<h1>Choose Page Option</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">	
+				<p><a href="#editpage">Edit Page</a></p>		
+				<p><a href="#viewpage">View Page</a></p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<p><a href="#mainmenu">Back to Main Menu</a></p>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<!-- Start of edit page -->
+		<div data-role="page" id="editpage">
+
+			<div data-role="header">
+				<h1>Edit Page</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">	
+				<p>This is where you would edit/add images</p>	
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<p><a href="#mainmenu">Back to Main Menu</a></p>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<!-- Start of third page -->
+		<div data-role="page" id="viewpage">
+
+			<div data-role="header">
+				<h1>View Page</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">	
+				<p>Here are some images...not</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<p><a href="#mainmenu">Back to Main Menu</a></p>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+	</body>
+</html>
