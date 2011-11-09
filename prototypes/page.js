@@ -34,15 +34,15 @@ function Page(ID) {
 		
 			// update database record...
 			var thisObj = this;
-			var result_id = lib.update("pages", {ID: this.ID}, function(row) {
-				// note "this" takes on a different context within a function, so we must use thisObj
-				row = thisObj;
+			lib.update("pages", {ID: this.ID}, function(row) {
+				row.description = thisObj.description;
+				row.pageOrder = thisObj.pageOrder;
 
 				return row;
 			});
 			lib.commit();// commit the db operation
 			
-			this.ID = result_id;
+			return this.ID; // return existing id
 		}
 		else {
 			console.log("inserting...");
@@ -52,9 +52,9 @@ function Page(ID) {
 			lib.commit();
 		
 			this.ID = result_id;
+			
+			return result_id; // return new record id
 		}
-	
-		return result_id; // return new record id
 	}
 	
 	// delete this object from the database (using this.ID to query db)

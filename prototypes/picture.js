@@ -33,15 +33,15 @@ var Picture = function(ID) {
 			// update database record...
 			console.log("updating...");
 			var thisObj = this;
-			var result_id = lib.update("pictures", {ID: this.ID}, function(row) {
-				// note "this" takes on a different context within a function, so we must use thisObj
-				row = thisObj;
+			lib.update("pictures", {ID: this.ID}, function(row) {
+				row.keyword = thisObj.keyword;
+				row.imageData = thisObj.imageData;
 
 				return row;
 			});
 			lib.commit();// commit the db operation
 			
-			this.ID = result_id;
+			return this.ID; // return existing id
 		}
 		else {
 			// insert new database record
@@ -50,9 +50,9 @@ var Picture = function(ID) {
 			lib.commit();// commit the db operation
 		
 			this.ID = result_id;
+			
+			return result_id; // return new record id
 		}
-	
-		return result_id; // return new record id
 	}
 	
 	// delete this object from the database (using this.ID to query db)

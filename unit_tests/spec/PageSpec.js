@@ -34,17 +34,17 @@ describe("Update", function() {
 		
 		page.description = "My description";		
 		
-		page.save();
+		var new_id = page.save();
+		
+		var results = lib.query("pages", {ID: new_id});
+		expect(results[0].description).toEqual("My description");
 		
 		page.description = "Different description";
 		
-		page.save();
+		var update_id = page.save();
 		
-		var results = lib.query("pages", {ID: page.ID});
-		
-		
-				
-		expect(results[0].description).toEqual("Different Description");
+		var results = lib.query("pages", {ID: update_id});
+		expect(results[0].description).toEqual("Different description");
 
 	});
 });
