@@ -6,8 +6,7 @@
 		<!--- jquery core --->
 		<script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
 		
-		<!--- JS libraries --->
-		<script type="text/javascript" src="jquery-mobile/jquery.mobile-1.0rc2.js"></script>	
+		<!--- libraries that project files depend on --->
 		<script type="text/javascript" src="localstoragedb/localstoragedb.js"></script>
 		<script type="text/javascript" src="base64/base64.js"></script>
 		
@@ -17,6 +16,9 @@
 		<script type="text/javascript" src="prototypes/picture.js"></script>
 		<script type="text/javascript" src="prototypes/report.js"></script>
 		<script type="text/javascript" src="main.js"></script>
+		
+		<!--- jquery mobile. important: put this after project files --->
+		<script type="text/javascript" src="jquery-mobile/jquery.mobile-1.0rc2.js"></script>	
 		
 		<!--- stylesheets --->
 		<link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.0rc2.css" />
@@ -31,13 +33,33 @@
 			</div><!-- /header -->
 
 			<div data-role="content">	
-				<p><a href="#pageoption">I'm a Page, click me</a></p>	
+			  <ul id="page_list" data-role="listview" data-inset="true">
+					<li><a href="#createpage">Add a new page</a></li>	
+				</ul>
 			</div><!-- /content -->
 
 			<div data-role="footer">
 				<h4>Page Footer</h4>
 			</div><!-- /footer -->
 		</div><!-- /page -->
+
+
+		<!-- Start of options page -->
+		<div data-role="page" id="createpage">
+
+			<div data-role="header">
+				<h1>New Page</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">	
+				<p>TODO: add form here</p>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<p><a href="#mainmenu">Back to Main Menu</a></p>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+
 
 		<!-- Start of options page -->
 		<div data-role="page" id="pageoption">
