@@ -22,12 +22,10 @@ $(document).ready(function() {
 	
 	
 	$('#createPageForm').submit(function(){
-		var descInput = $(this).find('input[name="description"]');
-
 		var page = new Page();
-		page.description = descInput.val();
+		page.description = $(this).find('input[name="description"]').val();
 		page.save();
 
-		descInput.val('');
+		this.reset();
 	});
 });
