@@ -30,9 +30,16 @@ $(document).ready(function() {
 	
 	// handle viewpage display
 	$('#viewpage').live('pageshow',function(event){
-		console.log($.urlParam('ID'));
+		var page_ID = $.urlParam('ID');
 
-		// TODO: put in dynamic code to add images here
+		var picIDs = new Page(page_ID).getAllPictureIDs();
+
+		// dynamically add images
+		$.each(picIDs, function(i, picID){
+			var pic_data = new Picture(picID);
+			$picture = $('<img src="'+pic_data.imageData+'">');
+			$('#viewpage div[data-role="content"]').append($picture);
+		});
 	});
 
 	$('#createPageForm').submit(function(){

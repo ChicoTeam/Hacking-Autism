@@ -103,6 +103,16 @@ function Page(ID) {
 		return true;
 	}
 
+	this.getAllPictureIDs = function() {
+		var pic_ID_array = [];
+		var results = lib.query("pages_pictures", {page_ID: this.ID});
+		for(var i = 0; i < results.length; i++) {
+			pic_ID_array.push(results[i].picture_ID);
+		}
+
+		return pic_ID_array;
+	}
+
 	this.removePicture = function(pic_ID) {
 		var page_ID = this.ID;
 		var results = lib.deleteRows("pages_pictures", function(row) {
