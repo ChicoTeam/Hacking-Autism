@@ -37,7 +37,7 @@ $(document).ready(function() {
 		// dynamically add images
 		$.each(picIDs, function(i, picID){
 			var pic_data = new Picture(picID);
-			$picture = $('<img src="'+pic_data.imageData+'">');
+			var $picture = $('<img src="'+pic_data.imageData+'">');
 			$('#viewpage div[data-role="content"]').append($picture);
 		});
 	});
