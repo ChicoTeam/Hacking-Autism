@@ -83,4 +83,14 @@ function load_db_with_samples(){
 	pic.save();
 
 	page.addPicture(pic.ID);
+
+	var pic2 = new Picture();
+	pic2.imageData = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC";
+	pic2.save();
+
+	var page2 = new Page();
+	page2.description = "another page";
+	page2.save();
+	page2.addPicture(pic2.ID);
+
 }
