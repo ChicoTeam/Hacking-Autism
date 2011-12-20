@@ -30,15 +30,36 @@ $(document).ready(function() {
 	
 	// handle viewpage display
 	$('#viewpage').live('pageshow',function(event){
-		var page_ID = $.urlParam('ID');
+		var page_ID = $.urlParam('ID');// note: this doesn't work during the pagecreate event
 
 		var picIDs = new Page(page_ID).getAllPictureIDs();
 
 		// dynamically add images
 		$.each(picIDs, function(i, picID){
-			var pic_data = new Picture(picID);
-			var $picture = $('<img src="'+pic_data.imageData+'">');
-			$('#viewpage div[data-role="content"]').append($picture);
+			var picture = new Picture(picID);
+			var $img = $('<img src="'+picture.imageData+'">');
+			$('#viewpage div[data-role="content"]').prepend($img);
+		});
+
+		var $addpic_link = $(this).find('.addpic_link');
+		$addpic_link.attr('href',$addpic_link.attr('href') + '?page_ID=' + page_ID);
+	});
+
+	// dynamically create pictures page
+	$('#pictures_page').live('pageshow',function(event){
+		var page_ID = $.urlParam('page_ID');// note: this doesn't work during the pagecreate event
+
+		var pictures_table = lib.query('pictures');
+
+		$.each(pictures_table, function(i, pic_row){
+			var picture = new Picture(pic_row.ID);
+			var $img = $('<img data-id="'+picture.ID+'" src="'+picture.imageData+'">');
+			$img.click(function(){
+				var pic_id = $(this).data('id');
+				var page = new Page(page_ID);
+				page.addPicture(pic_id);
+			});
+			$('#pictures_page div[data-role="content"]').append($img);
 		});
 	});
 
@@ -50,3 +71,16 @@ $(document).ready(function() {
 		this.reset();
 	});
 });
+
+
+function load_db_with_samples(){
+	var page = new Page();
+	page.description = "Neat images";
+	page.save();
+
+	var pic = new Picture();
+	pic.imageData = "data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7";
+	pic.save();
+
+	page.addPicture(pic.ID);
+}
